@@ -30,10 +30,6 @@ export default class Button {
 
     this.SCORE.value += chosenWeight > otherWeight ? 1 : -this.SCORE.value;
 
-    window.alert(`
-      You chose ${this.amount} ${this.name}s. 
-      The other option was ${otherOption.amount} ${otherOption.name}s. 
-      Your choice was ${result}.
-    `);
+    console.log(`${this.name} is ${result} than ${otherOption.name}`);
   }
 }

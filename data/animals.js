@@ -26,3 +26,10 @@ export const randomAnimal = () => {
     const randomIndex = Math.floor(Math.random() * ANIMALS.length);
     return ANIMALS[randomIndex];
 }
+
+export const generateOption = () => {
+    const option = randomAnimal()
+    option.amount = Math.floor(Math.random() * 50) + 1
+  
+    return option
+  }

@@ -4,10 +4,27 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Which is Heavier!?</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mogra&display=swap" rel="stylesheet">
+
+    <title>heavier?</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <div>
+        <h1>which is heavier?</h1>
+        <div class="stats">
+          <h3 id="score">Score: 0</h3>
+          <h3 id="best">Best: ?</h3>
+        </div>
+        <div class="card">
+          <button id="optionA" type="button"></button>
+          <button id="optionB" type="button"></button>
+        </div>
+      </div>
+    </div>
     <script type="module" src="/main.js"></script>
   </body>
 </html>
