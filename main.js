@@ -12,4 +12,32 @@ const OPTIONS = {
   B: generateOption()
 }
 
-const interaction = new Interaction(SCORE, OPTIONS)
+const LOOP = {
+  lastTimestamp: null,
+  countdown: 5,
+}
+
+const interaction = new Interaction(SCORE, OPTIONS, LOOP)
+
+// Game loop setup
+let lastTimestamp = null;
+
+function gameLoop(timestamp) {
+  if (!lastTimestamp) lastTimestamp = timestamp;
+  const deltaTime = timestamp - lastTimestamp;
+  lastTimestamp = timestamp;
+
+  interaction.updateCountdown(deltaTime);
+
+  if (LOOP.countdown <= 0) {
+    console.log('Time is up!');
+    SCORE.value = 0;
+    interaction.resetButtons();
+  }
+
+  requestAnimationFrame(gameLoop);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  requestAnimationFrame(gameLoop);
+});

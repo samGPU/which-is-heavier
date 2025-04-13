@@ -22,14 +22,19 @@ export const ANIMALS = [
     { name: 'Pig', weight: 120 }
 ]
 
+let previousAnimal = null;
 export const randomAnimal = () => {
-    const randomIndex = Math.floor(Math.random() * ANIMALS.length);
-    return ANIMALS[randomIndex];
+    let animal;
+    do {
+        const randomIndex = Math.floor(Math.random() * ANIMALS.length);
+        animal = ANIMALS[randomIndex];
+    } while (animal === previousAnimal);
+    previousAnimal = animal;
+    return animal;
 }
 
 export const generateOption = () => {
     const option = randomAnimal()
     option.amount = Math.floor(Math.random() * 50) + 1
-  
     return option
-  }
+}

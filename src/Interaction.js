@@ -2,9 +2,10 @@ import Button from "./button";
 import { generateOption } from "../data/animals";
 
 export default class Interaction{
-    constructor(SCORE, OPTIONS) {
+    constructor(SCORE, OPTIONS, LOOP) {
         this.SCORE = SCORE;
         this.OPTIONS = OPTIONS;
+        this.LOOP = LOOP;
 
         this.optionAButton = new Button(
           SCORE,
@@ -19,15 +20,19 @@ export default class Interaction{
           OPTIONS.B
         )
 
+        this.timerElement = document.querySelector('#timer')
+
         document.querySelector('#optionA').addEventListener('click', () => {
             this.optionAButton.choose()
             this.updateScore()
+            this.updateBest()
             this.resetButtons()
         })
         
         document.querySelector('#optionB').addEventListener('click', () => {
             this.optionBButton.choose()
             this.updateScore()
+            this.updateBest()
             this.resetButtons()
         })
     }
@@ -37,13 +42,35 @@ export default class Interaction{
         this.OPTIONS.B = generateOption()
         this.optionAButton.label(this.OPTIONS.A.name, this.OPTIONS.A.amount)
         this.optionBButton.label(this.OPTIONS.B.name, this.OPTIONS.B.amount)
+        this.updateScore();
+        this.updateBest();
+        this.resetCountdown()
     }
 
     updateScore() {
         document.querySelector('#score').innerHTML = `Score: ${this.SCORE.value}`
+    }
+
+    updateBest() {
         if(this.SCORE.value > this.SCORE.best) {
-        this.SCORE.best = this.SCORE.value
-          document.querySelector('#best').innerHTML = `Best: ${this.SCORE.best}`
+            this.SCORE.best = this.SCORE.value
+            document.querySelector('#best').innerHTML = `Best: ${this.SCORE.best}`
         }
-      }
+    }
+
+    updateCountdown(deltaTime) {
+        this.LOOP.countdown -= deltaTime / 1000;
+        if (this.LOOP.countdown < 0) this.LOOP.countdown = 0;
+        this.timerElement.textContent = this.LOOP.countdown.toFixed(2);
+
+        const percentage = this.LOOP.countdown / 5; // Assuming 5 is the max countdown value
+        const red = Math.round((1 - percentage) * 255);
+        const green = Math.round(percentage * 255);
+        this.timerElement.style.color = `rgb(${red}, ${green}, 0)`;
+    }
+
+    resetCountdown() {
+        this.LOOP.countdown = 5;
+        this.LOOP.lastTimestamp = null;
+    }
 }
