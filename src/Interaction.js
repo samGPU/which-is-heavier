@@ -47,6 +47,11 @@ export default class Interaction{
         this.resetCountdown()
     }
 
+    resetScore() {
+        this.SCORE.value = 0;
+        this.SCORE.gameOver = false;
+    }
+
     updateScore() {
         document.querySelector('#score').innerHTML = `Score: ${this.SCORE.value}`
     }
@@ -60,7 +65,6 @@ export default class Interaction{
 
     updateCountdown(deltaTime) {
         this.LOOP.countdown -= deltaTime / 1000;
-        if (this.LOOP.countdown < 0) this.LOOP.countdown = 0;
     
         const percentage = this.LOOP.countdown / this.LOOP.maxCountdown;
         const red = Math.round((1 - percentage) * 255);
@@ -71,7 +75,7 @@ export default class Interaction{
     }
 
     resetCountdown() {
-        this.LOOP.countdown = this.LOOP.maxCountdown;
+        this.LOOP.countdown = this.LOOP.maxCountdown + 1;
         this.LOOP.lastTimestamp = null;
     }
 
@@ -90,9 +94,8 @@ export default class Interaction{
     }
 
     restartGame() {
-        this.SCORE.value = 0;
-        this.SCORE.gameOver = false;
         this.resetCountdown();
+        this.resetScore();
         this.resetButtons();
         this.hideGameOver();
     }

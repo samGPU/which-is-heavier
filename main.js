@@ -15,32 +15,25 @@ const OPTIONS = {
 
 const LOOP = {
   lastTimestamp: null,
-  countdown: 10,
-  maxCountdown: 10,
+  countdown: 9,
+  maxCountdown: 9,
 }
 
 const interaction = new Interaction(SCORE, OPTIONS, LOOP)
 
-// Game loop setup
-let lastTimestamp = null;
-
 function gameLoop(timestamp) {
-  if (SCORE.gameOver ) {
+  console.log(`Game Loop: ${timestamp}`);
+  if (SCORE.gameOver || LOOP.countdown <= 0) {
     console.log('Game Over');
     interaction.showGameOver();
     return;
   }
 
-  if (!lastTimestamp) lastTimestamp = timestamp;
-  const deltaTime = timestamp - lastTimestamp;
-  lastTimestamp = timestamp;
+  if (!LOOP.lastTimestamp) LOOP.lastTimestamp = timestamp;
+  const deltaTime = timestamp - LOOP.lastTimestamp;
+  LOOP.lastTimestamp = timestamp;
 
   interaction.updateCountdown(deltaTime);
-
-  if (LOOP.countdown <= 0) {
-    console.log('Time is up!');
-    SCORE.gameOver = true;
-  }
 
   requestAnimationFrame(gameLoop);
 }
