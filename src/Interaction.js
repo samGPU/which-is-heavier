@@ -61,16 +61,17 @@ export default class Interaction{
     updateCountdown(deltaTime) {
         this.LOOP.countdown -= deltaTime / 1000;
         if (this.LOOP.countdown < 0) this.LOOP.countdown = 0;
-        this.timerElement.textContent = this.LOOP.countdown.toFixed(2);
-
-        const percentage = this.LOOP.countdown / 5; // Assuming 5 is the max countdown value
+    
+        const percentage = this.LOOP.countdown / this.LOOP.maxCountdown;
         const red = Math.round((1 - percentage) * 255);
         const green = Math.round(percentage * 255);
-        this.timerElement.style.color = `rgb(${red}, ${green}, 0)`;
+    
+        this.timerElement.style.width = `${percentage * 100}%`;
+        this.timerElement.style.backgroundColor = `rgb(${red}, ${green}, 70)`;
     }
 
     resetCountdown() {
-        this.LOOP.countdown = 5;
+        this.LOOP.countdown = this.LOOP.maxCountdown;
         this.LOOP.lastTimestamp = null;
     }
 }

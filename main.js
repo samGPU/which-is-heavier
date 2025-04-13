@@ -14,7 +14,8 @@ const OPTIONS = {
 
 const LOOP = {
   lastTimestamp: null,
-  countdown: 5,
+  countdown: 10,
+  maxCountdown: 10
 }
 
 const interaction = new Interaction(SCORE, OPTIONS, LOOP)

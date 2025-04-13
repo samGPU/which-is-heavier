@@ -52,6 +52,23 @@ h3 {
   font-size: 1em;
 }
 
+#timer-container {
+  border: 1px solid #1a1a1a;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 0 auto;
+  width: 10em;
+  height: 1em;
+  background-color: #ccc;
+}
+
+#timer {
+  width: 100%;
+  height: 100%;
+  background-color: #00ff00;
+  transition: width 0.1s linear, background-color 0.1s linear;
+}
+
 #app {
   max-width: 1280px;
   margin: 0 auto;
