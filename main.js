@@ -22,7 +22,6 @@ const LOOP = {
 const interaction = new Interaction(SCORE, OPTIONS, LOOP)
 
 function gameLoop(timestamp) {
-  console.log(`Game Loop: ${timestamp}`);
   if (SCORE.gameOver || LOOP.countdown <= 0) {
     console.log('Game Over');
     interaction.showGameOver();

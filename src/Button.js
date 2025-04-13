@@ -13,7 +13,7 @@ export default class Button {
     this.name = name;
     this.amount = amount;
 
-    this.element.innerHTML = `${this.amount} ${this.name}s`;
+    this.element.innerHTML = `${this.amount} ${this.name}`;
   }
 
   choose() {
@@ -27,6 +27,10 @@ export default class Button {
     const otherWeight = otherOption.weight * otherOption.amount;
 
     const result = chosenWeight > otherWeight ? 'Heavier' : 'Lighter';
+
+    // construct a message with the result e.g. 34 Elephants are heavier than 2 Lions
+    const message = `${otherOption.amount} ${otherOption.name} are heavier than ${this.amount} ${this.name}`;
+    this.SCORE.message = message;
 
     this.SCORE.gameOver = result === 'Lighter';
     if (!this.SCORE.gameOver) {
