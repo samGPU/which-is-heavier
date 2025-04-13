@@ -31,5 +31,15 @@ export default class Button {
     this.SCORE.value += chosenWeight > otherWeight ? 1 : -this.SCORE.value;
 
     console.log(`${this.name} is ${result} than ${otherOption.name}`);
+    
+    const titleElement = document.querySelector('#title');
+    // Add flashing effect
+    const flashClass = result === 'Heavier' ? 'flash-green' : 'flash-red';
+    titleElement.classList.add(flashClass);
+
+    // Remove the class after a short delay
+    setTimeout(() => {
+      titleElement.classList.remove(flashClass);
+    }, 500); 
   }
 }

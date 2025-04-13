@@ -39,6 +39,8 @@ function gameLoop(timestamp) {
   requestAnimationFrame(gameLoop);
 }
 
+
+
 document.addEventListener('DOMContentLoaded', () => {
   requestAnimationFrame(gameLoop);
 });
