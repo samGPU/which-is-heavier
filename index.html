@@ -14,18 +14,25 @@
   <body>
     <div id="app">
       <div>
-        <h1 id="title">which is heavier?</h1>
-        <div class="stats">
-          <h3 id="score">Score: 0</h3>
-          <h3 id="best">Best: ?</h3>
+        <div id="game">
+          <h1 id="title">which is heavier?</h1>
+          <div class="stats">
+            <h3 id="score">Score: 0</h3>
+            <h3 id="best">Best: ?</h3>
+          </div>
+          <div id="timer-container">
+            <div id="timer"></div>
+          </div>
+          <div class="card">
+            <button id="optionA" type="button"></button>
+            <button id="optionB" type="button"></button>
+          </div>
         </div>
-        <div id="timer-container">
-          <div id="timer"></div>
-        </div>
-        <div class="card">
-          <button id="optionA" type="button"></button>
-          <button id="optionB" type="button"></button>
-        </div>
+        <div id="end">
+          <h2 id="end-title">Game Over</h2>
+          <h3 id="finalScore">Score:</h3>
+          <h3 id="bestScore">Best:</h3>
+          <button id="restart" type="button">Play Again</button>
       </div>
     </div>
     <script type="module" src="/main.js"></script>

@@ -4,7 +4,8 @@ import { generateOption } from './data/animals'
 
 const SCORE = { 
   value: 0,
-  best: 0
+  best: 0,
+  gameOver: false,
 }
 
 const OPTIONS = {
@@ -15,7 +16,7 @@ const OPTIONS = {
 const LOOP = {
   lastTimestamp: null,
   countdown: 10,
-  maxCountdown: 10
+  maxCountdown: 10,
 }
 
 const interaction = new Interaction(SCORE, OPTIONS, LOOP)
@@ -24,6 +25,12 @@ const interaction = new Interaction(SCORE, OPTIONS, LOOP)
 let lastTimestamp = null;
 
 function gameLoop(timestamp) {
+  if (SCORE.gameOver ) {
+    console.log('Game Over');
+    interaction.showGameOver();
+    return;
+  }
+
   if (!lastTimestamp) lastTimestamp = timestamp;
   const deltaTime = timestamp - lastTimestamp;
   lastTimestamp = timestamp;
@@ -32,14 +39,16 @@ function gameLoop(timestamp) {
 
   if (LOOP.countdown <= 0) {
     console.log('Time is up!');
-    SCORE.value = 0;
-    interaction.resetButtons();
+    SCORE.gameOver = true;
   }
 
   requestAnimationFrame(gameLoop);
 }
 
-
+document.querySelector('#restart').addEventListener('click', () => {
+  interaction.restartGame()
+  requestAnimationFrame(gameLoop);
+})
 
 document.addEventListener('DOMContentLoaded', () => {
   requestAnimationFrame(gameLoop);

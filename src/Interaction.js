@@ -74,4 +74,27 @@ export default class Interaction{
         this.LOOP.countdown = this.LOOP.maxCountdown;
         this.LOOP.lastTimestamp = null;
     }
+
+    showGameOver() {
+        // hide all non-game over elements
+        document.querySelector('#game').style.display = 'none';
+        document.querySelector('#end').style.display = 'block';
+        document.querySelector('#finalScore').innerHTML = `Final Score: ${this.SCORE.value}`
+        document.querySelector('#bestScore').innerHTML = `Best Score: ${this.SCORE.best}`
+    }
+
+    hideGameOver() {
+        // show all non-game over elements
+        document.querySelector('#game').style.display = 'block';
+        document.querySelector('#end').style.display = 'none';
+    }
+
+    restartGame() {
+        this.SCORE.value = 0;
+        this.SCORE.gameOver = false;
+        this.resetCountdown();
+        this.resetButtons();
+        this.hideGameOver();
+    }
+
 }
