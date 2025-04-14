@@ -26,6 +26,9 @@ const clock = new THREE.Clock()
 
 function gameLoop() {
   if (SCORE.gameOver || LOOP.countdown <= 0) {
+    if (LOOP.countdown <= 0) {
+      SCORE.message = 'You ran out of time!'
+    }
     console.log('Game Over');
     interaction.showGameOver();
     return;
