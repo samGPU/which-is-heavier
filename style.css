@@ -84,7 +84,7 @@ h3 {
   flex-flow: row nowrap;
   justify-content: center;
   align-self: center;
-  gap: 60%;
+  gap: 5em;
 }
 
 button {

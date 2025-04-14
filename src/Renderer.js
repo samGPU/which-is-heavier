@@ -18,14 +18,14 @@ export default class Renderer {
 
         this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas });
         this.renderer.setSize(this.sizes.width, this.sizes.height);
-        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.setClearColor(0x6495ED, 1);
+        this.renderer.shadowMap.enabled = true;
+        this.renderer.shadowMap.type = THREE.BasicShadowMap;
 
         window.addEventListener('resize', this.onWindowResize.bind(this), false);
 
-        // this.addTestCube();
         this.addLights();
-        // this.addFloor();
         this.addPlatforms();
     }
 
@@ -34,29 +34,25 @@ export default class Renderer {
         this.rightPlatform = new Platform(this.scene, { x: 3, y: 0, z: 0 });
     }
 
-    addFloor() {
-        const floorGeometry = new THREE.PlaneGeometry(10, 10);
-        const floorMaterial = new THREE.MeshStandardMaterial({ color: 0x808080 });
-        const floor = new THREE.Mesh(floorGeometry, floorMaterial);
-        floor.rotation.x = -Math.PI / 2;
-        this.scene.add(floor);
-    }
-
     addLights() {
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-        ambientLight.position.set(0, 5, 0);
         this.scene.add(ambientLight);
+    
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
+        directionalLight.position.set(0, 5, 0.5);
+        directionalLight.castShadow = true;
+    
+        directionalLight.shadow.mapSize.width = 2048;
+        directionalLight.shadow.mapSize.height = 2048;
 
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-        directionalLight.position.set(5, 5, 5);
+        directionalLight.shadow.camera.left = -5;
+        directionalLight.shadow.camera.right = 5;
+        directionalLight.shadow.camera.top = 5;
+        directionalLight.shadow.camera.bottom = -5;
+        directionalLight.shadow.camera.near = 0.1;
+        directionalLight.shadow.camera.far = 50;
+    
         this.scene.add(directionalLight);
-    }
-
-    addTestCube() {
-        const geometry = new THREE.BoxGeometry();
-        const material = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
-        this.cube = new THREE.Mesh(geometry, material);
-        this.scene.add(this.cube);
     }
 
     onWindowResize() {

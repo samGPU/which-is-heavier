@@ -29,7 +29,7 @@ export default class Platform {
 
     addSphere() {
         const geometry = new THREE.SphereGeometry(0.5, 32, 32);
-        const material = new THREE.MeshStandardMaterial({ color: 0xff0000 });
+        const material = new THREE.MeshStandardMaterial({ color: 0xc1c1c1 });
         this.sphere = new THREE.Mesh(geometry, material);
         this.sphere.position.set(0, 5, 0);
         this.sphere.castShadow = true;
@@ -48,10 +48,9 @@ export default class Platform {
 
     addFloor() {
         const geometry = new THREE.BoxGeometry(4, 0.1, 3);
-        const material = new THREE.MeshStandardMaterial({ color: 0xc1c1c1 });
+        const material = new THREE.MeshStandardMaterial({ color: 0xFFDAB9 });
         this.floor = new THREE.Mesh(geometry, material);
         this.floor.position.set(0, -0.05, 0);
-        this.floor.castShadow = true;
         this.floor.receiveShadow = true;
         this.platform.add(this.floor);
 
