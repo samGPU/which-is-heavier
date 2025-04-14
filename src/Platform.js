@@ -29,7 +29,7 @@ export default class Platform {
 
     addSphere() {
         const geometry = new THREE.SphereGeometry(0.5, 32, 32);
-        const material = new THREE.MeshStandardMaterial({ color: 0xc1c1c1 });
+        const material = new THREE.MeshStandardMaterial({ color: 0xa1a1c1 });
         this.sphere = new THREE.Mesh(geometry, material);
         this.sphere.position.set(0, 5, 0);
         this.sphere.castShadow = true;
