@@ -1,5 +1,6 @@
 import './style.css'
 import Interaction from './src/Interaction'
+import Renderer from './src/Renderer'
 import { generateOption } from './data/animals'
 
 const SCORE = { 
@@ -19,6 +20,7 @@ const LOOP = {
   maxCountdown: 9,
 }
 
+const renderer = new Renderer()
 const interaction = new Interaction(SCORE, OPTIONS, LOOP)
 
 function gameLoop(timestamp) {
@@ -33,6 +35,8 @@ function gameLoop(timestamp) {
   LOOP.lastTimestamp = timestamp;
 
   interaction.updateCountdown(deltaTime);
+
+  renderer.render(deltaTime);
 
   requestAnimationFrame(gameLoop);
 }
