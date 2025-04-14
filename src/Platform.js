@@ -22,6 +22,7 @@ export default class Platform {
             }
         )
         this.world.addContactMaterial(this.defaultContactMaterial)
+        this.world.defaultContactMaterial = this.defaultContactMaterial
 
         this.addSphere();
         this.addFloor();
@@ -40,8 +41,7 @@ export default class Platform {
         this.sphereBody = new CANNON.Body({
             mass: 1,
             position: new CANNON.Vec3(0, 5, 0),
-            shape: sphereShape,
-            material: this.defaultMaterial
+            shape: sphereShape
         });
         this.world.addBody(this.sphereBody);
     }
@@ -57,8 +57,7 @@ export default class Platform {
         const floorShape = new CANNON.Plane();
         this.floorBody = new CANNON.Body({
             mass: 0,
-            shape: floorShape,
-            material: this.defaultMaterial
+            shape: floorShape
         });
         this.floorBody.quaternion.setFromAxisAngle(new CANNON.Vec3(-1, 0, 0), Math.PI * 0.5)
         this.world.addBody(this.floorBody);
@@ -69,6 +68,5 @@ export default class Platform {
         this.world.step(1 / 60, clampedDeltaTime, 3);
 
         this.sphere.position.copy(this.sphereBody.position)
-
     }
 }
