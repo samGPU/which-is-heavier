@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import Scale from './Scale';
+import Platform from './Platform';
 
 export default class Renderer {
     constructor() {
@@ -23,14 +23,15 @@ export default class Renderer {
 
         window.addEventListener('resize', this.onWindowResize.bind(this), false);
 
-        this.addTestCube();
+        // this.addTestCube();
         this.addLights();
-        this.addFloor();
-        this.addScales();
+        // this.addFloor();
+        this.addPlatforms();
     }
 
-    addScales() {
-        this.leftScale = new Scale(this.scene);
+    addPlatforms() {
+        this.leftPlatform = new Platform(this.scene, { x: -3, y: 0, z: 0 });
+        this.rightPlatform = new Platform(this.scene, { x: 3, y: 0, z: 0 });
     }
 
     addFloor() {
@@ -43,6 +44,7 @@ export default class Renderer {
 
     addLights() {
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        ambientLight.position.set(0, 5, 0);
         this.scene.add(ambientLight);
 
         const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
@@ -66,7 +68,8 @@ export default class Renderer {
     }
 
     render(deltaTime) {
-        this.leftScale.update(deltaTime);
+        this.leftPlatform.update(deltaTime);
+        this.rightPlatform.update(deltaTime);
         this.renderer.render(this.scene, this.camera);
     }
 
