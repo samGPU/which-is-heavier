@@ -2,6 +2,7 @@ import './style.css'
 import Interaction from './src/Interaction'
 import Renderer from './src/Renderer'
 import { generateOption } from './data/animals'
+import * as THREE from 'three'
 
 const SCORE = { 
   value: 0,
@@ -15,27 +16,23 @@ const OPTIONS = {
 }
 
 const LOOP = {
-  lastTimestamp: null,
   countdown: 9,
   maxCountdown: 9,
 }
 
 const renderer = new Renderer()
 const interaction = new Interaction(SCORE, OPTIONS, LOOP)
+const clock = new THREE.Clock()
 
-function gameLoop(timestamp) {
+function gameLoop() {
   if (SCORE.gameOver || LOOP.countdown <= 0) {
     console.log('Game Over');
     interaction.showGameOver();
     return;
   }
 
-  if (!LOOP.lastTimestamp) LOOP.lastTimestamp = timestamp;
-  const deltaTime = timestamp - LOOP.lastTimestamp;
-  LOOP.lastTimestamp = timestamp;
-
-  interaction.updateCountdown(deltaTime);
-
+  const deltaTime = clock.getDelta();
+  interaction.updateCountdown(deltaTime * 1000);
   renderer.render(deltaTime);
 
   requestAnimationFrame(gameLoop);

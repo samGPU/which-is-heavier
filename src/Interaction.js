@@ -76,7 +76,6 @@ export default class Interaction{
 
     resetCountdown() {
         this.LOOP.countdown = this.LOOP.maxCountdown + 1;
-        this.LOOP.lastTimestamp = null;
     }
 
     showGameOver() {
