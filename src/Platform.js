@@ -24,26 +24,32 @@ export default class Platform {
         this.world.addContactMaterial(this.defaultContactMaterial)
         this.world.defaultContactMaterial = this.defaultContactMaterial
 
-        this.addSphere();
+        this.spheres = [];
+        this.addSpheres(5, 0.5);
         this.addFloor();
     }
 
-    addSphere() {
-        const geometry = new THREE.SphereGeometry(0.5, 32, 32);
-        const material = new THREE.MeshStandardMaterial({ color: 0xa1a1c1 });
-        this.sphere = new THREE.Mesh(geometry, material);
-        this.sphere.position.set(0, 5, 0);
-        this.sphere.castShadow = true;
-        this.sphere.receiveShadow = true;
-        this.platform.add(this.sphere);
-
-        const sphereShape = new CANNON.Sphere(0.5);
-        this.sphereBody = new CANNON.Body({
-            mass: 1,
-            position: new CANNON.Vec3(0, 5, 0),
-            shape: sphereShape
-        });
-        this.world.addBody(this.sphereBody);
+    addSpheres(count, radius) {
+        for (let i = 0; i < count; i++) {
+            const geometry = new THREE.SphereGeometry(radius, 32, 32);
+            const material = new THREE.MeshStandardMaterial({ color: 0xa1a1c1 });
+            const sphere = new THREE.Mesh(geometry, material);
+            sphere.position.set(Math.random(), 5 + i * 2, Math.random()); // Offset each sphere vertically
+            sphere.castShadow = true;
+            sphere.receiveShadow = true;
+            this.platform.add(sphere);
+    
+            const sphereShape = new CANNON.Sphere(radius);
+            const sphereBody = new CANNON.Body({
+                mass: 1,
+                position: new CANNON.Vec3(sphere.position.x, sphere.position.y, sphere.position.z),
+                shape: sphereShape
+            });
+            this.world.addBody(sphereBody);
+    
+            // Store the sphere and its body in the spheres array
+            this.spheres.push({ mesh: sphere, body: sphereBody });
+        }
     }
 
     addFloor() {
@@ -53,13 +59,14 @@ export default class Platform {
         this.floor.position.set(0, -0.05, 0);
         this.floor.receiveShadow = true;
         this.platform.add(this.floor);
-
-        const floorShape = new CANNON.Plane();
+    
+        // Use a CANNON.Box shape with half-extents matching the geometry size
+        const floorShape = new CANNON.Box(new CANNON.Vec3(2, 0.05, 1.5)); // Half of 4x0.1x3
         this.floorBody = new CANNON.Body({
             mass: 0,
             shape: floorShape
         });
-        this.floorBody.quaternion.setFromAxisAngle(new CANNON.Vec3(-1, 0, 0), Math.PI * 0.5)
+        this.floorBody.position.set(0, -0.05, 0); // Match the visual floor's position
         this.world.addBody(this.floorBody);
     }
 
@@ -67,6 +74,9 @@ export default class Platform {
         const clampedDeltaTime = Math.min(deltaTime, 1 / 30);
         this.world.step(1 / 60, clampedDeltaTime, 3);
 
-        this.sphere.position.copy(this.sphereBody.position)
+        this.spheres.forEach(({ mesh, body }) => {
+            mesh.position.copy(body.position);
+            mesh.quaternion.copy(body.quaternion);
+        });
     }
 }
