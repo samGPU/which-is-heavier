@@ -30,8 +30,8 @@ export default class Renderer {
     }
 
     addPlatforms() {
-        this.leftPlatform = new Platform(this.scene, { x: -3, y: 0.75, z: 0 });
-        this.rightPlatform = new Platform(this.scene, { x: 3, y: 0.75, z: 0 });
+        this.leftPlatform = new Platform(this.scene, { x: -3, y: 0, z: -1 });
+        this.rightPlatform = new Platform(this.scene, { x: 3, y: 0, z: -1 });
     }
 
     addLights() {
