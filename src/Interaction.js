@@ -78,6 +78,11 @@ export default class Interaction{
         this.LOOP.countdown = this.LOOP.maxCountdown + 1;
     }
 
+    startGame() {
+        document.querySelector('#start').style.display = 'none';
+        document.querySelector('#game').style.display = 'block';
+    }
+
     showGameOver() {
         // hide all non-game over elements
         document.querySelector('#game').style.display = 'none';

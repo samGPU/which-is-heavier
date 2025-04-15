@@ -25,7 +25,6 @@ export default class Platform {
         this.world.defaultContactMaterial = this.defaultContactMaterial
 
         this.spheres = [];
-        this.addSpheres(5, 0.5);
         this.addFloor();
     }
 

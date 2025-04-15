@@ -22,7 +22,7 @@ const LOOP = {
 
 const renderer = new Renderer()
 const interaction = new Interaction(SCORE, OPTIONS, LOOP)
-const clock = new THREE.Clock()
+const clock = new THREE.Clock(false)
 
 function gameLoop() {
   if (SCORE.gameOver || LOOP.countdown <= 0) {
@@ -48,6 +48,13 @@ document.querySelector('#restart').addEventListener('click', () => {
   requestAnimationFrame(gameLoop);
 })
 
-document.addEventListener('DOMContentLoaded', () => {
+document.querySelector('#start').addEventListener('click', () => {
+  interaction.startGame()
+  clock.start();
   requestAnimationFrame(gameLoop);
+})
+
+document.addEventListener('DOMContentLoaded', () => {
+  const deltaTime = clock.getDelta();
+  renderer.render(deltaTime);
 });
