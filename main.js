@@ -3,6 +3,9 @@ import Interaction from './src/Interaction'
 import Renderer from './src/Renderer'
 import { generateOption } from './data/animals'
 import * as THREE from 'three'
+import GLBLoader from './src/GLBLoader'
+
+const loader = GLBLoader.getInstance('./Animals.glb');
 
 const SCORE = { 
   value: 0,
@@ -53,6 +56,7 @@ document.querySelector('#start').addEventListener('click', () => {
   clock.start();
   requestAnimationFrame(gameLoop);
   interaction.spawnSpheres(OPTIONS.A.amount, OPTIONS.B.amount)
+  interaction.spawnModels(OPTIONS.A, OPTIONS.B)
 })
 
 document.addEventListener('DOMContentLoaded', () => {

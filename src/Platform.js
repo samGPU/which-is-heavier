@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import * as CANNON from 'cannon-es';
+import GLBLoader from './GLBLoader'
 
 export default class Platform {
     constructor(scene, position = { x: 0, y: 0, z: 0 }) {
@@ -24,8 +25,20 @@ export default class Platform {
         this.world.addContactMaterial(this.defaultContactMaterial)
         this.world.defaultContactMaterial = this.defaultContactMaterial
 
+        this.glbLoader = GLBLoader.getInstance('./Animals.glb');
+
         this.spheres = [];
         this.addFloor();
+    }
+
+    addModels(count, name) {
+        console.log('Adding models:', name);
+        const model = this.glbLoader.getMesh(name);
+        if (!model) {
+            console.error(`Model ${name} not found`);
+            return;
+        }
+        console.log(model);
     }
 
     addSpheres(count, radius) {

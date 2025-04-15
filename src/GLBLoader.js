@@ -1,13 +1,21 @@
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
-export default class GLBLoader {
+class GLBLoader {
     constructor(url) {
+        if (GLBLoader.instance) {
+            return GLBLoader.instance;
+        }
+
         this.url = url;
         this.loader = new GLTFLoader();
         this.meshes = new Map();
         this.isLoaded = false;
 
-        this.loadGLB();
+        if (url) {
+            this.loadGLB();
+        }
+
+        GLBLoader.instance = this;
     }
 
     loadGLB() {
@@ -38,4 +46,13 @@ export default class GLBLoader {
         }
         return this.meshes.get(name) || null;
     }
+
+    static getInstance(url = null) {
+        if (!GLBLoader.instance) {
+            GLBLoader.instance = new GLBLoader(url);
+        }
+        return GLBLoader.instance;
+    }
 }
+
+export default GLBLoader;
