@@ -1,8 +1,11 @@
 import * as THREE from 'three';
 import Platform from './Platform';
+import GLBLoader from './GLBLoader';
 
 export default class Renderer {
     constructor() {
+
+        this.glbLoader = new GLBLoader('./Animals.glb');
         this.canvas = document.querySelector('#webgl');
 
         this.sizes = {
