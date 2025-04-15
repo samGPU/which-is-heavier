@@ -345,6 +345,6 @@ export const randomAnimal = () => {
 
 export const generateOption = () => {
     const option = randomAnimal()
-    option.amount = Math.floor(Math.random() * 50) + 1
+    option.amount = Math.floor(Math.random() * 20) + 2
     return option
 }

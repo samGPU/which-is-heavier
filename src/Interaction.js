@@ -38,9 +38,9 @@ export default class Interaction{
         })
     }
 
-    spawnSpheres(count) {
-        this.RENDERER.leftPlatform.addSpheres(count, 0.5);
-        this.RENDERER.rightPlatform.addSpheres(count, 0.5);
+    spawnSpheres(countA, countB) {
+        this.RENDERER.leftPlatform.addSpheres(countA, 0.5);
+        this.RENDERER.rightPlatform.addSpheres(countB, 0.5);
     }
 
     resetButtons() {

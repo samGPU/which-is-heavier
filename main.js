@@ -52,8 +52,7 @@ document.querySelector('#start').addEventListener('click', () => {
   interaction.startGame()
   clock.start();
   requestAnimationFrame(gameLoop);
-  interaction.spawnSpheres(OPTIONS.A.amount)
-  interaction.spawnSpheres(OPTIONS.B.amount)
+  interaction.spawnSpheres(OPTIONS.A.amount, OPTIONS.B.amount)
 })
 
 document.addEventListener('DOMContentLoaded', () => {
