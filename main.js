@@ -21,7 +21,7 @@ const LOOP = {
 }
 
 const renderer = new Renderer()
-const interaction = new Interaction(SCORE, OPTIONS, LOOP)
+const interaction = new Interaction(SCORE, OPTIONS, LOOP, renderer)
 const clock = new THREE.Clock(false)
 
 function gameLoop() {
@@ -52,6 +52,8 @@ document.querySelector('#start').addEventListener('click', () => {
   interaction.startGame()
   clock.start();
   requestAnimationFrame(gameLoop);
+  interaction.spawnSpheres(OPTIONS.A.amount)
+  interaction.spawnSpheres(OPTIONS.B.amount)
 })
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -2,10 +2,11 @@ import Button from "./button";
 import { generateOption } from "../data/animals";
 
 export default class Interaction{
-    constructor(SCORE, OPTIONS, LOOP) {
+    constructor(SCORE, OPTIONS, LOOP, RENDERER) {
         this.SCORE = SCORE;
         this.OPTIONS = OPTIONS;
         this.LOOP = LOOP;
+        this.RENDERER = RENDERER;
 
         this.optionAButton = new Button(
           SCORE,
@@ -37,6 +38,11 @@ export default class Interaction{
         })
     }
 
+    spawnSpheres(count) {
+        this.RENDERER.leftPlatform.addSpheres(count, 0.5);
+        this.RENDERER.rightPlatform.addSpheres(count, 0.5);
+    }
+
     resetButtons() {
         this.OPTIONS.A = generateOption()
         this.OPTIONS.B = generateOption()
@@ -45,6 +51,9 @@ export default class Interaction{
         this.updateScore();
         this.updateBest();
         this.resetCountdown()
+
+        this.RENDERER.leftPlatform.addSpheres(this.OPTIONS.A.amount, 0.5);
+        this.RENDERER.rightPlatform.addSpheres(this.OPTIONS.B.amount, 0.5);
     }
 
     resetScore() {
