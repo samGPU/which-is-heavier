@@ -31,6 +31,7 @@ function gameLoop() {
     }
     console.log('Game Over');
     interaction.showGameOver();
+    clock.stop();
     return;
   }
 
@@ -43,6 +44,7 @@ function gameLoop() {
 
 document.querySelector('#restart').addEventListener('click', () => {
   interaction.restartGame()
+  clock.start();
   requestAnimationFrame(gameLoop);
 })
 
