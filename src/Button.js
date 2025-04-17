@@ -37,5 +37,7 @@ export default class Button {
       this.SCORE.value += 1;
     }
     console.log(`${this.name} is ${result} than ${otherOption.name}`);
+
+    return this.SCORE.gameOver;
   }
 }

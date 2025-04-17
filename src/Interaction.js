@@ -24,21 +24,22 @@ export default class Interaction{
         this.timerElement = document.querySelector('#timer')
 
         document.querySelector('#optionA').addEventListener('click', () => {
-            this.optionAButton.choose()
+            const end = this.optionAButton.choose()
             this.updateScore()
             this.updateBest()
-            this.resetButtons()
+            if(!end) this.resetButtons()
         })
         
         document.querySelector('#optionB').addEventListener('click', () => {
-            this.optionBButton.choose()
+            const end = this.optionBButton.choose()
             this.updateScore()
             this.updateBest()
-            this.resetButtons()
+            if(!end) this.resetButtons()
         })
     }
 
     spawnModels(optionA, optionB) {
+        console.warn('Spawning models:', optionA, optionB);
         this.RENDERER.leftPlatform.addModels(optionA.amount, optionA.meshName);
         this.RENDERER.rightPlatform.addModels(optionB.amount, optionB.meshName);
     }
