@@ -55,8 +55,12 @@ export default class Platform {
             model.castShadow = true;
             model.receiveShadow = true;
             this.platform.add(model);
+
+            const boundingBox = new THREE.Box3().setFromObject(model);
+            const size = new THREE.Vector3();
+            boundingBox.getSize(size);
     
-            const modelShape = new CANNON.Box(new CANNON.Vec3(0.5, 0.5, 0.5));
+            const modelShape = new CANNON.Box(new CANNON.Vec3(size.x / 2, size.y / 2, size.z / 2));
             const modelBody = new CANNON.Body({
                 mass: 1,
                 position: new CANNON.Vec3(model.position.x, model.position.y, model.position.z),
