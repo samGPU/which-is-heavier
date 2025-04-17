@@ -51,6 +51,12 @@ document.querySelector('#restart').addEventListener('click', () => {
   requestAnimationFrame(gameLoop);
 })
 
+document.addEventListener('glbLoaded', () => {
+  console.log('GLB loaded event triggered');
+  document.querySelector('#loading').style.display = 'none';
+  document.querySelector('#startButton').style.display = 'inline-block';
+});
+
 document.querySelector('#start').addEventListener('click', () => {
   interaction.startGame()
   clock.start();

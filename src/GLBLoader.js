@@ -28,10 +28,12 @@ class GLBLoader {
                     }
                 });
                 this.isLoaded = true;
+                const event = new Event('glbLoaded');
+                document.dispatchEvent(event);
                 console.log('GLB loaded successfully:', this.meshes);
             },
             (xhr) => {
-                console.log(`GLB loading: ${(xhr.loaded / xhr.total) * 100}%`);
+                // console.log(`GLB loading: ${(xhr.loaded / xhr.total) * 100}%`);
             },
             (error) => {
                 console.error('Error loading GLB:', error);

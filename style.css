@@ -116,6 +116,10 @@ button:focus-visible {
   display: none;
 }
 
+#startButton {
+  display: none;
+}
+
 #webgl {
   position: absolute;
   top: 0;
