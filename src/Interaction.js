@@ -38,11 +38,6 @@ export default class Interaction{
         })
     }
 
-    spawnSpheres(countA, countB) {
-        this.RENDERER.leftPlatform.addSpheres(countA, 0.5);
-        this.RENDERER.rightPlatform.addSpheres(countB, 0.5);
-    }
-
     spawnModels(optionA, optionB) {
         this.RENDERER.leftPlatform.addModels(optionA.amount, optionA.meshName);
         this.RENDERER.rightPlatform.addModels(optionB.amount, optionB.meshName);
@@ -57,7 +52,6 @@ export default class Interaction{
         this.updateBest();
         this.resetCountdown()
 
-        // this.spawnSpheres(this.OPTIONS.A.amount, this.OPTIONS.B.amount)
         this.spawnModels(this.OPTIONS.A, this.OPTIONS.B)
     }
 

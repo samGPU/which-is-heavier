@@ -26,8 +26,7 @@ export default class Platform {
         this.world.defaultContactMaterial = this.defaultContactMaterial
 
         this.glbLoader = GLBLoader.getInstance('./Animals.glb');
-
-        this.spheres = [];
+        
         this.models = [];
         this.addFloor();
     }
@@ -41,17 +40,14 @@ export default class Platform {
         }
 
         for (let i = 0; i < count; i++) {
-            // Clone the model to create a unique instance
             const model = originalModel.clone();
             model.traverse((child) => {
                 if (child.isMesh) {
-                    child.material = child.material.clone(); // Ensure unique material instances
+                    child.material = child.material.clone();
                 }
             });
     
-            console.log(`Model ${i + 1}:`, model);
-    
-            model.position.set(Math.random(), 5 + i * 2, Math.random()); // Offset each model vertically
+            model.position.set(Math.random(), 5 + i * 2, Math.random());
             model.castShadow = true;
             model.receiveShadow = true;
             this.platform.add(model);
@@ -72,29 +68,6 @@ export default class Platform {
         }
     }
 
-    addSpheres(count, radius) {
-        for (let i = 0; i < count; i++) {
-            const geometry = new THREE.SphereGeometry(radius, 32, 32);
-            const material = new THREE.MeshStandardMaterial({ color: 0xa1a1c1 });
-            const sphere = new THREE.Mesh(geometry, material);
-            sphere.position.set(Math.random(), 5 + i * 2, Math.random()); // Offset each sphere vertically
-            sphere.castShadow = true;
-            sphere.receiveShadow = true;
-            this.platform.add(sphere);
-    
-            const sphereShape = new CANNON.Sphere(radius);
-            const sphereBody = new CANNON.Body({
-                mass: 1,
-                position: new CANNON.Vec3(sphere.position.x, sphere.position.y, sphere.position.z),
-                shape: sphereShape
-            });
-            this.world.addBody(sphereBody);
-    
-            // Store the sphere and its body in the spheres array
-            this.spheres.push({ mesh: sphere, body: sphereBody });
-        }
-    }
-
     addFloor() {
         const geometry = new THREE.BoxGeometry(4, 0.1, 3);
         const material = new THREE.MeshStandardMaterial({ color: 0xFFDAB9 });
@@ -103,24 +76,18 @@ export default class Platform {
         this.floor.receiveShadow = true;
         this.platform.add(this.floor);
     
-        // Use a CANNON.Box shape with half-extents matching the geometry size
-        const floorShape = new CANNON.Box(new CANNON.Vec3(2, 0.05, 1.5)); // Half of 4x0.1x3
+        const floorShape = new CANNON.Box(new CANNON.Vec3(2, 0.05, 1.5));
         this.floorBody = new CANNON.Body({
             mass: 0,
             shape: floorShape
         });
-        this.floorBody.position.set(0, -0.05, 0); // Match the visual floor's position
+        this.floorBody.position.set(0, -0.05, 0);
         this.world.addBody(this.floorBody);
     }
 
     update(deltaTime) {
         const clampedDeltaTime = Math.min(deltaTime, 1 / 30);
         this.world.step(1 / 60, clampedDeltaTime, 3);
-
-        // this.spheres.forEach(({ mesh, body }) => {
-        //     mesh.position.copy(body.position);
-        //     mesh.quaternion.copy(body.quaternion);
-        // });
 
         this.models.forEach(({ mesh, body }) => {
             mesh.position.copy(body.position);

@@ -61,7 +61,6 @@ document.querySelector('#start').addEventListener('click', () => {
   interaction.startGame()
   clock.start();
   requestAnimationFrame(gameLoop);
-  // interaction.spawnSpheres(OPTIONS.A.amount, OPTIONS.B.amount)
   interaction.spawnModels(OPTIONS.A, OPTIONS.B)
 })
 
