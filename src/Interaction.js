@@ -45,7 +45,7 @@ export default class Interaction{
 
     spawnModels(optionA, optionB) {
         this.RENDERER.leftPlatform.addModels(optionA.amount, optionA.meshName);
-        this.RENDERER.leftPlatform.addModels(optionB.amount, optionB.meshName);
+        this.RENDERER.rightPlatform.addModels(optionB.amount, optionB.meshName);
     }
 
     resetButtons() {
@@ -57,7 +57,7 @@ export default class Interaction{
         this.updateBest();
         this.resetCountdown()
 
-        this.spawnSpheres(this.OPTIONS.A.amount, this.OPTIONS.B.amount)
+        // this.spawnSpheres(this.OPTIONS.A.amount, this.OPTIONS.B.amount)
         this.spawnModels(this.OPTIONS.A, this.OPTIONS.B)
     }
 

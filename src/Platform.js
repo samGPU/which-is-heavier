@@ -28,17 +28,44 @@ export default class Platform {
         this.glbLoader = GLBLoader.getInstance('./Animals.glb');
 
         this.spheres = [];
+        this.models = [];
         this.addFloor();
     }
 
     addModels(count, name) {
-        console.log('Adding models:', name);
-        const model = this.glbLoader.getMesh(name);
-        if (!model) {
+        console.log('Adding models:', name, count);
+        const originalModel = this.glbLoader.getMesh(name);
+        if (!originalModel) {
             console.error(`Model ${name} not found`);
             return;
         }
-        console.log(model);
+
+        for (let i = 0; i < count; i++) {
+            // Clone the model to create a unique instance
+            const model = originalModel.clone();
+            model.traverse((child) => {
+                if (child.isMesh) {
+                    child.material = child.material.clone(); // Ensure unique material instances
+                }
+            });
+    
+            console.log(`Model ${i + 1}:`, model);
+    
+            model.position.set(Math.random(), 5 + i * 2, Math.random()); // Offset each model vertically
+            model.castShadow = true;
+            model.receiveShadow = true;
+            this.platform.add(model);
+    
+            const modelShape = new CANNON.Box(new CANNON.Vec3(0.5, 0.5, 0.5));
+            const modelBody = new CANNON.Body({
+                mass: 1,
+                position: new CANNON.Vec3(model.position.x, model.position.y, model.position.z),
+                shape: modelShape
+            });
+            this.world.addBody(modelBody);
+    
+            this.models.push({ mesh: model, body: modelBody });
+        }
     }
 
     addSpheres(count, radius) {
@@ -86,7 +113,12 @@ export default class Platform {
         const clampedDeltaTime = Math.min(deltaTime, 1 / 30);
         this.world.step(1 / 60, clampedDeltaTime, 3);
 
-        this.spheres.forEach(({ mesh, body }) => {
+        // this.spheres.forEach(({ mesh, body }) => {
+        //     mesh.position.copy(body.position);
+        //     mesh.quaternion.copy(body.quaternion);
+        // });
+
+        this.models.forEach(({ mesh, body }) => {
             mesh.position.copy(body.position);
             mesh.quaternion.copy(body.quaternion);
         });
