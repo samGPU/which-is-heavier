@@ -1,4 +1,4 @@
-import Button from "./button";
+import Button from "./Button";
 import { generateOption } from "../data/animals";
 
 export default class Interaction{
