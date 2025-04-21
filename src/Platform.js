@@ -6,13 +6,15 @@ export default class Platform {
     constructor(scene, position = { x: 0, y: 0, z: 0 }) {
         this.scene = scene;
 
-        this.defaultLocation = new THREE.Vector3(position.x, position.y, position.z);
+        this.defaultLocation = new THREE.Vector3(0, -0.05, 0);
         this.desiredLocation = this.defaultLocation.clone();
+        this.defaultRotation = new THREE.Vector3(0, 0, 0);
+        this.desiredRotation = this.defaultRotation.clone();
         this.lerpSpeed = 0.05; // Adjust speed of movement
         this.moveAmount = 0.8;
 
         this.platform = new THREE.Group();
-        this.platform.position.copy(this.defaultLocation);
+        this.platform.position.copy(position);
         this.scene.add(this.platform);
 
         this.world = new CANNON.World();
@@ -36,6 +38,14 @@ export default class Platform {
         this.addFloor();
     }
 
+    tip() {
+        this.setDesiredRotation(
+            this.defaultRotation.x + (Math.PI / 2), 
+            this.defaultRotation.y, 
+            this.defaultRotation.z
+        );
+    }
+
     moveUp() {
         this.setDesiredLocation(
             this.defaultLocation.x, 
@@ -55,6 +65,11 @@ export default class Platform {
     setDesiredLocation(x, y, z) {
         console.log('Setting desired location:', x, y, z);
         this.desiredLocation.set(x, y, z);
+    }
+
+    setDesiredRotation(x, y, z) {
+        console.log('Setting desired rotation:', x, y, z);
+        this.desiredRotation.set(x, y, z);
     }
 
     addModels(count, name) {
@@ -115,17 +130,31 @@ export default class Platform {
         const clampedDeltaTime = Math.min(deltaTime, 1 / 30);
         this.world.step(1 / 60, clampedDeltaTime, 3);
 
-        // Lerp platform position
-        this.platform.position.lerp(this.desiredLocation, this.lerpSpeed);
-
-        // Check if the platform has reached the desired location
-        if (this.platform.position.distanceTo(this.desiredLocation) < 0.01) {
+        // Lerp floor position
+        this.floor.position.lerp(this.desiredLocation, this.lerpSpeed);
+        // Check if the floor has reached the desired location
+        if (this.floor.position.distanceTo(this.desiredLocation) < 0.01) {
             if (!this.desiredLocation.equals(this.defaultLocation)) {
                 this.desiredLocation.copy(this.defaultLocation); // Reset to default
             }
         }
 
-         // Sync models with physics bodies and remove models below -10 on the y-axis
+        // Lerp floor rotation
+        this.floor.rotation.x += (this.desiredRotation.x - this.floor.rotation.x) * this.lerpSpeed;
+        this.floor.rotation.y += (this.desiredRotation.y - this.floor.rotation.y) * this.lerpSpeed;
+        this.floor.rotation.z += (this.desiredRotation.z - this.floor.rotation.z) * this.lerpSpeed;
+        // Check if the floor has reached the desired rotation
+        if (Math.abs(this.floor.rotation.x - this.desiredRotation.x) < 0.01) {
+            if (!this.desiredRotation.equals(this.defaultRotation)) {
+                this.desiredRotation.copy(this.defaultRotation); // Reset to default
+            }
+        }
+
+        // Sync floorBody with floor
+        this.floorBody.position.copy(this.floor.position);
+        this.floorBody.quaternion.copy(this.floor.quaternion);
+
+        // Sync models with physics bodies and remove models below -10 on the y-axis
         this.models = this.models.filter(({ mesh, body }) => {
             if (body.position.y < -10) {
                 this.platform.remove(mesh);

@@ -32,12 +32,9 @@ export default class Interaction{
                 this.RENDERER.rightPlatform.moveDown()
                 this.resetButtons()
             } else {
-                this.RENDERER.leftPlatform.moveDown()
-                this.RENDERER.rightPlatform.moveUp()
+                this.RENDERER.leftPlatform.tip()
+                this.RENDERER.rightPlatform.tip()
             }
-
-            // if end, move platform a downwards
-
         })
         
         document.querySelector('#optionB').addEventListener('click', () => {
@@ -49,8 +46,8 @@ export default class Interaction{
                 this.RENDERER.rightPlatform.moveDown()
                 this.resetButtons()
             } else {
-                this.RENDERER.leftPlatform.moveDown()
-                this.RENDERER.rightPlatform.moveUp()
+                this.RENDERER.leftPlatform.tip()
+                this.RENDERER.rightPlatform.tip()
             }
         })
     }
