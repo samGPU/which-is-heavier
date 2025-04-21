@@ -2,332 +2,332 @@ export const ANIMALS = [
     {
         "name": "Alligators",
         "meshName": "Alligator",
-        "weight": 100
+        "weight": 230
     },
     {
         "name": "Apes",
         "meshName": "Ape",
-        "weight": 4
+        "weight": 40
     },
     {
         "name": "Armadillos",
         "meshName": "Armadillo",
-        "weight": 42
+        "weight": 6
     },
     {
         "name": "Beagles",
         "meshName": "Beagle",
-        "weight": 93
+        "weight": 10
     },
     {
         "name": "Bears",
         "meshName": "Bear",
-        "weight": 14
+        "weight": 300
     },
     {
         "name": "Rams",
         "meshName": "Ram",
-        "weight": 92
+        "weight": 100
     },
     {
         "name": "Black Bears",
         "meshName": "BlackBear",
-        "weight": 74
+        "weight": 150
     },
     {
         "name": "Boars",
         "meshName": "Boar",
-        "weight": 1
+        "weight": 100
     },
     {
         "name": "Caimans",
         "meshName": "Caiman",
-        "weight": 78
+        "weight": 40
     },
     {
         "name": "Camels",
         "meshName": "Camel",
-        "weight": 71
+        "weight": 500
     },
     {
         "name": "Capuchins",
         "meshName": "Capuchin",
-        "weight": 79
+        "weight": 3.5
     },
     {
         "name": "Capybaras",
         "meshName": "Capybara",
-        "weight": 22
+        "weight": 50
     },
     {
         "name": "Cats",
         "meshName": "Cat",
-        "weight": 38
+        "weight": 4.5
     },
     {
         "name": "Cheetahs",
         "meshName": "Cheetah",
-        "weight": 57
+        "weight": 50
     },
     {
         "name": "Cougars",
         "meshName": "Cougar",
-        "weight": 38
+        "weight": 60
     },
     {
         "name": "Cows",
         "meshName": "Cow",
-        "weight": 48
+        "weight": 600
     },
     {
         "name": "Crayfish",
         "meshName": "Crayfish",
-        "weight": 88
+        "weight": 0.05
     },
     {
         "name": "Deer",
         "meshName": "Deer",
-        "weight": 85
+        "weight": 100
     },
     {
         "name": "Dobermans",
         "meshName": "Doberman",
-        "weight": 28
+        "weight": 40
     },
     {
         "name": "Dolphins",
         "meshName": "Dolphin",
-        "weight": 82
+        "weight": 150
     },
     {
         "name": "Ducks",
         "meshName": "Duck",
-        "weight": 57
+        "weight": 1.5
     },
     {
         "name": "Eagles",
         "meshName": "Eagle",
-        "weight": 93
+        "weight": 6
     },
     {
         "name": "Elephants",
         "meshName": "Elephant",
-        "weight": 25
+        "weight": 5000
     },
     {
         "name": "Elk",
         "meshName": "Elk",
-        "weight": 9
+        "weight": 320
     },
     {
         "name": "Ferrets",
         "meshName": "Ferret",
-        "weight": 58
+        "weight": 1.2
     },
     {
         "name": "Frogs",
         "meshName": "Frog",
-        "weight": 38
+        "weight": 0.01
     },
     {
         "name": "Giraffes",
         "meshName": "Giraffe",
-        "weight": 67
+        "weight": 1200
     },
     {
         "name": "Goats",
         "meshName": "Goat",
-        "weight": 52
+        "weight": 60
     },
     {
         "name": "Goldfish",
         "meshName": "Goldfish",
-        "weight": 14
+        "weight": 0.1
     },
     {
         "name": "Geese",
         "meshName": "Goose",
-        "weight": 48
+        "weight": 5
     },
     {
         "name": "Egrets",
         "meshName": "Egret",
-        "weight": 19
+        "weight": 1
     },
     {
         "name": "Hamsters",
         "meshName": "Hamster",
-        "weight": 87
+        "weight": 0.1
     },
     {
         "name": "Hens",
         "meshName": "Hen",
-        "weight": 22
+        "weight": 2
     },
     {
         "name": "Herons",
         "meshName": "Heron",
-        "weight": 2
+        "weight": 2.5
     },
     {
         "name": "Hippopotamus",
         "meshName": "Hippopotamus",
-        "weight": 87
+        "weight": 1500
     },
     {
         "name": "Horses",
         "meshName": "Horse",
-        "weight": 74
+        "weight": 500
     },
     {
         "name": "Hummingbirds",
         "meshName": "Hummingbird",
-        "weight": 3
+        "weight": 0.004
     },
     {
         "name": "Kangaroos",
         "meshName": "Kangaroo",
-        "weight": 28
+        "weight": 85
     },
     {
         "name": "Kittens",
         "meshName": "Kitten",
-        "weight": 29
+        "weight": 1
     },
     {
         "name": "Koalas",
         "meshName": "Koala",
-        "weight": 98
+        "weight": 9
     },
     {
         "name": "Lions",
         "meshName": "Lion",
-        "weight": 92
+        "weight": 190
     },
     {
         "name": "Lobsters",
         "meshName": "Lobster",
-        "weight": 21
+        "weight": 2
     },
     {
         "name": "Mallards",
         "meshName": "Mallard",
-        "weight": 20
+        "weight": 1.2
     },
     {
         "name": "Squirrel Monkeys",
         "meshName": "SquirrelMonkey",
-        "weight": 100
+        "weight": 0.8
     },
     {
         "name": "Octopi",
         "meshName": "Octopus",
-        "weight": 81
+        "weight": 15
     },
     {
         "name": "Orcas",
         "meshName": "Orca",
-        "weight": 60
+        "weight": 5000
     },
     {
         "name": "Pandas",
         "meshName": "Panda",
-        "weight": 66
+        "weight": 100
     },
     {
         "name": "Parrots",
         "meshName": "Parrot",
-        "weight": 53
+        "weight": 0.1
     },
     {
         "name": "Pelicans",
         "meshName": "Pelican",
-        "weight": 68
+        "weight": 6
     },
     {
         "name": "Penguins",
         "meshName": "Penguin",
-        "weight": 20
+        "weight": 30
     },
     {
         "name": "Pigs",
         "meshName": "Pig",
-        "weight": 89
+        "weight": 150
     },
     {
         "name": "Puppies",
         "meshName": "Puppy",
-        "weight": 9
+        "weight": 6
     },
     {
         "name": "Quails",
         "meshName": "Quail",
-        "weight": 92
+        "weight": 0.2
     },
     {
         "name": "Raccoons",
         "meshName": "Raccoon",
-        "weight": 69
+        "weight": 8
     },
     {
         "name": "Ravens",
         "meshName": "Raven",
-        "weight": 90
+        "weight": 1.2
     },
     {
         "name": "Rhinos",
         "meshName": "Rhinoceros",
-        "weight": 69
+        "weight": 2300
     },
     {
         "name": "Roosters",
         "meshName": "Rooster",
-        "weight": 36
+        "weight": 3
     },
     {
         "name": "Seagulls",
         "meshName": "Seagull",
-        "weight": 57
+        "weight": 1
     },
     {
         "name": "Sheep",
         "meshName": "Sheep",
-        "weight": 89
+        "weight": 80
     },
     {
         "name": "Snails",
         "meshName": "Snail",
-        "weight": 92
+        "weight": 0.03
     },
     {
         "name": "Sparrows",
         "meshName": "Sparrow",
-        "weight": 37
+        "weight": 0.03
     },
     {
         "name": "Squirrels",
         "meshName": "Squirrel",
-        "weight": 51
+        "weight": 0.5
     },
     {
         "name": "Tigers",
         "meshName": "Tiger",
-        "weight": 74
+        "weight": 220
     },
     {
         "name": "Trout",
         "meshName": "Trout",
-        "weight": 6
+        "weight": 2.5
     },
     {
         "name": "Wolves",
         "meshName": "Wolf",
-        "weight": 39
+        "weight": 40
     },
     {
         "name": "Zebras",
         "meshName": "Zebra",
-        "weight": 51
+        "weight": 350
     }
 ]
 
