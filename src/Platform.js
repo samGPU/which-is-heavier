@@ -47,6 +47,7 @@ export default class Platform {
     }
 
     moveUp() {
+        this.tip();
         this.setDesiredLocation(
             this.defaultLocation.x, 
             this.defaultLocation.y + this.moveAmount, 
@@ -55,6 +56,7 @@ export default class Platform {
     }
 
     moveDown() {
+        this.tip();
         this.setDesiredLocation(
             this.defaultLocation.x, 
             this.defaultLocation.y - this.moveAmount, 
@@ -70,6 +72,14 @@ export default class Platform {
     setDesiredRotation(x, y, z) {
         console.log('Setting desired rotation:', x, y, z);
         this.desiredRotation.set(x, y, z);
+    }
+
+    isFloorReady() {
+        const positionReady = this.floor.position.distanceTo(this.defaultLocation) < 0.01;
+        const rotationReady = Math.abs(this.floor.rotation.x - this.defaultRotation.x) < 0.01 &&
+                              Math.abs(this.floor.rotation.y - this.defaultRotation.y) < 0.01 &&
+                              Math.abs(this.floor.rotation.z - this.defaultRotation.z) < 0.01;
+        return positionReady && rotationReady;
     }
 
     addModels(count, name) {
@@ -88,7 +98,11 @@ export default class Platform {
                 }
             });
     
-            model.position.set(Math.random(), 5 + i * 2, Math.random());
+            model.position.set(
+                (Math.random() - 0.5) * 4,
+                0.5,
+                (Math.random() - 0.5) * 3
+            );
             model.castShadow = true;
             model.receiveShadow = true;
             this.platform.add(model);

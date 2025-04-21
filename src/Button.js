@@ -9,7 +9,16 @@ export default class Button {
     this.label(this.name, this.amount)
   }
 
+  hide() {
+    this.element.style.display = 'none';
+  }
+
+  show() {
+    this.element.style.display = 'block';
+  }
+
   label(name, amount) {
+    this.show();
     this.name = name;
     this.amount = amount;
 

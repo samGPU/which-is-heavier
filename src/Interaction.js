@@ -8,6 +8,8 @@ export default class Interaction{
         this.LOOP = LOOP;
         this.RENDERER = RENDERER;
 
+        this.waitForPlatforms = false;
+
         this.optionAButton = new Button(
           SCORE,
           OPTIONS, 
@@ -28,8 +30,8 @@ export default class Interaction{
             this.updateScore()
             this.updateBest()
             if(!end) {
-                this.RENDERER.leftPlatform.moveUp()
-                this.RENDERER.rightPlatform.moveDown()
+                this.RENDERER.leftPlatform.tip()
+                this.RENDERER.rightPlatform.tip()
                 this.resetButtons()
             } else {
                 this.RENDERER.leftPlatform.tip()
@@ -42,8 +44,8 @@ export default class Interaction{
             this.updateScore()
             this.updateBest()
             if(!end) {
-                this.RENDERER.leftPlatform.moveUp()
-                this.RENDERER.rightPlatform.moveDown()
+                this.RENDERER.leftPlatform.tip()
+                this.RENDERER.rightPlatform.tip()
                 this.resetButtons()
             } else {
                 this.RENDERER.leftPlatform.tip()
@@ -56,18 +58,27 @@ export default class Interaction{
         console.warn('Spawning models:', optionA, optionB);
         this.RENDERER.leftPlatform.addModels(optionA.amount, optionA.meshName);
         this.RENDERER.rightPlatform.addModels(optionB.amount, optionB.meshName);
+
+        this.optionAButton.label(this.OPTIONS.A.name, this.OPTIONS.A.amount);
+        this.optionBButton.label(this.OPTIONS.B.name, this.OPTIONS.B.amount);
+
+        this.timerElement.parentElement.style.display = 'block';
     }
 
     resetButtons() {
-        this.OPTIONS.A = generateOption()
-        this.OPTIONS.B = generateOption()
-        this.optionAButton.label(this.OPTIONS.A.name, this.OPTIONS.A.amount)
-        this.optionBButton.label(this.OPTIONS.B.name, this.OPTIONS.B.amount)
         this.updateScore();
         this.updateBest();
-        this.resetCountdown()
+        this.resetCountdown();
 
-        this.spawnModels(this.OPTIONS.A, this.OPTIONS.B)
+        this.OPTIONS.A = generateOption();
+        this.OPTIONS.B = generateOption();
+
+        this.optionAButton.hide();
+        this.optionBButton.hide();
+        // hide the timer bar
+        this.timerElement.parentElement.style.display = 'none';
+    
+        this.waitingForPlatforms = true;
     }
 
     resetScore() {

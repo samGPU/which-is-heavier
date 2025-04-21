@@ -33,13 +33,21 @@ function gameLoop() {
       SCORE.message = 'You ran out of time!'
     }
     interaction.showGameOver();
-    // clock.stop();
-    // return;
   }
 
   const deltaTime = clock.getDelta();
-  interaction.updateCountdown(deltaTime * 1000);
+  // interaction.updateCountdown(deltaTime * 1000);
   renderer.render(deltaTime);
+
+  // Check if platforms are ready and spawn models
+  if (interaction.waitingForPlatforms) {
+    if (renderer.leftPlatform.isFloorReady() && renderer.rightPlatform.isFloorReady()) {
+      interaction.spawnModels(OPTIONS.A, OPTIONS.B);
+      interaction.waitingForPlatforms = false; // Reset the flag
+    }
+  } else {
+    interaction.updateCountdown(deltaTime * 1000);
+  }
 
   requestAnimationFrame(gameLoop);
 }
