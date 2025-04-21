@@ -125,10 +125,16 @@ export default class Platform {
             }
         }
 
-        // Sync models with physics bodies
-        this.models.forEach(({ mesh, body }) => {
+         // Sync models with physics bodies and remove models below -10 on the y-axis
+        this.models = this.models.filter(({ mesh, body }) => {
+            if (body.position.y < -10) {
+                this.platform.remove(mesh);
+                this.world.removeBody(body);
+                return false;
+            }
             mesh.position.copy(body.position);
             mesh.quaternion.copy(body.quaternion);
+            return true;
         });
     }
 }
