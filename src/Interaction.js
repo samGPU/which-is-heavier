@@ -27,14 +27,31 @@ export default class Interaction{
             const end = this.optionAButton.choose()
             this.updateScore()
             this.updateBest()
-            if(!end) this.resetButtons()
+            if(!end) {
+                this.RENDERER.leftPlatform.moveUp()
+                this.RENDERER.rightPlatform.moveDown()
+                this.resetButtons()
+            } else {
+                this.RENDERER.leftPlatform.moveDown()
+                this.RENDERER.rightPlatform.moveUp()
+            }
+
+            // if end, move platform a downwards
+
         })
         
         document.querySelector('#optionB').addEventListener('click', () => {
             const end = this.optionBButton.choose()
             this.updateScore()
             this.updateBest()
-            if(!end) this.resetButtons()
+            if(!end) {
+                this.RENDERER.leftPlatform.moveUp()
+                this.RENDERER.rightPlatform.moveDown()
+                this.resetButtons()
+            } else {
+                this.RENDERER.leftPlatform.moveDown()
+                this.RENDERER.rightPlatform.moveUp()
+            }
         })
     }
 

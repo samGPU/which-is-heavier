@@ -6,8 +6,13 @@ export default class Platform {
     constructor(scene, position = { x: 0, y: 0, z: 0 }) {
         this.scene = scene;
 
+        this.defaultLocation = new THREE.Vector3(position.x, position.y, position.z);
+        this.desiredLocation = this.defaultLocation.clone();
+        this.lerpSpeed = 0.05; // Adjust speed of movement
+        this.moveAmount = 0.8;
+
         this.platform = new THREE.Group();
-        this.platform.position.set(position.x, position.y, position.z);
+        this.platform.position.copy(this.defaultLocation);
         this.scene.add(this.platform);
 
         this.world = new CANNON.World();
@@ -29,6 +34,27 @@ export default class Platform {
         
         this.models = [];
         this.addFloor();
+    }
+
+    moveUp() {
+        this.setDesiredLocation(
+            this.defaultLocation.x, 
+            this.defaultLocation.y + this.moveAmount, 
+            this.defaultLocation.z
+        );
+    }
+
+    moveDown() {
+        this.setDesiredLocation(
+            this.defaultLocation.x, 
+            this.defaultLocation.y - this.moveAmount, 
+            this.defaultLocation.z
+        );
+    }
+
+    setDesiredLocation(x, y, z) {
+        console.log('Setting desired location:', x, y, z);
+        this.desiredLocation.set(x, y, z);
     }
 
     addModels(count, name) {
@@ -89,6 +115,17 @@ export default class Platform {
         const clampedDeltaTime = Math.min(deltaTime, 1 / 30);
         this.world.step(1 / 60, clampedDeltaTime, 3);
 
+        // Lerp platform position
+        this.platform.position.lerp(this.desiredLocation, this.lerpSpeed);
+
+        // Check if the platform has reached the desired location
+        if (this.platform.position.distanceTo(this.desiredLocation) < 0.01) {
+            if (!this.desiredLocation.equals(this.defaultLocation)) {
+                this.desiredLocation.copy(this.defaultLocation); // Reset to default
+            }
+        }
+
+        // Sync models with physics bodies
         this.models.forEach(({ mesh, body }) => {
             mesh.position.copy(body.position);
             mesh.quaternion.copy(body.quaternion);

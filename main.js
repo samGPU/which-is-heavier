@@ -28,14 +28,13 @@ const interaction = new Interaction(SCORE, OPTIONS, LOOP, renderer)
 const clock = new THREE.Clock(false)
 
 function gameLoop() {
-  if (SCORE.gameOver || LOOP.countdown <= 0) {
+  if (SCORE.gameOver || LOOP.countdown <= 0 && !interaction.isGameOver) {
     if (LOOP.countdown <= 0) {
       SCORE.message = 'You ran out of time!'
     }
-    console.log('Game Over');
     interaction.showGameOver();
-    clock.stop();
-    return;
+    // clock.stop();
+    // return;
   }
 
   const deltaTime = clock.getDelta();
