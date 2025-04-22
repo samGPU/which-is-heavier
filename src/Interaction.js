@@ -1,5 +1,5 @@
 import Button from "./Button";
-import { generateOption } from "../data/animals";
+import { generateOptions } from "../data/animals";
 
 export default class Interaction{
     constructor(SCORE, OPTIONS, LOOP, RENDERER) {
@@ -70,8 +70,9 @@ export default class Interaction{
         this.updateBest();
         this.resetCountdown();
 
-        this.OPTIONS.A = generateOption();
-        this.OPTIONS.B = generateOption();
+        const options = generateOptions();
+        this.OPTIONS.A = options.A;
+        this.OPTIONS.B = options.B;
 
         this.optionAButton.hide();
         this.optionBButton.hide();

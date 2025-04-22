@@ -348,3 +348,14 @@ export const generateOption = () => {
     option.amount = Math.floor(Math.random() * 20) + 2
     return option
 }
+
+// Generates two options A and B that are similar in weight
+export const generateOptions = () => {
+    const optionA = generateOption()
+    const optionB = generateOption()
+    
+    return {
+        A: optionA,
+        B: optionB
+    }
+}

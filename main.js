@@ -1,7 +1,7 @@
 import './style.css'
 import Interaction from './src/Interaction'
 import Renderer from './src/Renderer'
-import { generateOption } from './data/animals'
+import { generateOptions } from './data/animals'
 import * as THREE from 'three'
 import GLBLoader from './src/GLBLoader'
 
@@ -13,10 +13,7 @@ const SCORE = {
   gameOver: false,
 }
 
-const OPTIONS = {
-  A: generateOption(),
-  B: generateOption()
-}
+const OPTIONS = generateOptions()
 
 const LOOP = {
   countdown: 9,
