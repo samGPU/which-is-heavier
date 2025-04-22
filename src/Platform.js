@@ -10,7 +10,7 @@ export default class Platform {
         this.desiredLocation = this.defaultLocation.clone();
         this.defaultRotation = new THREE.Vector3(0, 0, 0);
         this.desiredRotation = this.defaultRotation.clone();
-        this.lerpSpeed = 0.05; // Adjust speed of movement
+        this.lerpSpeed = 0.1; // Adjust speed of movement
         this.moveAmount = 0.8;
 
         this.platform = new THREE.Group();
