@@ -98,11 +98,6 @@ export default class Platform {
                 }
             });
     
-            model.position.set(
-                (Math.random() - 0.5) * 4,
-                0.5,
-                (Math.random() - 0.5) * 3
-            );
             model.castShadow = true;
             model.receiveShadow = true;
             this.platform.add(model);
@@ -110,6 +105,12 @@ export default class Platform {
             const boundingBox = new THREE.Box3().setFromObject(model);
             const size = new THREE.Vector3();
             boundingBox.getSize(size);
+
+            model.position.set(
+                (Math.random() - 0.5) * 4,
+                0.5,
+                (Math.random() - 0.5) * 3
+            );
     
             const modelShape = new CANNON.Box(new CANNON.Vec3(size.x / 2, size.y / 2, size.z / 2));
             const modelBody = new CANNON.Body({
