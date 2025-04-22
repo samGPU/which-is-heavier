@@ -1,5 +1,6 @@
 import Button from "./Button";
 import { generateOptions } from "../data/animals";
+import SoundEffect from "./Audio";
 
 export default class Interaction{
     constructor(SCORE, OPTIONS, LOOP, RENDERER) {
@@ -7,6 +8,9 @@ export default class Interaction{
         this.OPTIONS = OPTIONS;
         this.LOOP = LOOP;
         this.RENDERER = RENDERER;
+
+        this.gameOverSound = new SoundEffect('./gameOverSound.ogg');
+        this.correctSound = new SoundEffect('./correctSound.ogg');
 
         this.waitForPlatforms = false;
 
@@ -33,9 +37,11 @@ export default class Interaction{
                 this.RENDERER.leftPlatform.tip()
                 this.RENDERER.rightPlatform.tip()
                 this.resetButtons()
+                this.correctSound.play();
             } else {
                 this.RENDERER.leftPlatform.tip()
                 this.RENDERER.rightPlatform.tip()
+                this.gameOverSound.play();
             }
         })
         
@@ -47,9 +53,11 @@ export default class Interaction{
                 this.RENDERER.leftPlatform.tip()
                 this.RENDERER.rightPlatform.tip()
                 this.resetButtons()
+                this.correctSound.play();
             } else {
                 this.RENDERER.leftPlatform.tip()
                 this.RENDERER.rightPlatform.tip()
+                this.gameOverSound.play();
             }
         })
     }
