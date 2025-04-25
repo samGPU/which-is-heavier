@@ -2,6 +2,8 @@
 
 ### Play it! https://samgpu.itch.io/which-is-heavier
 
+![cover-image](https://github.com/user-attachments/assets/a53ecdb1-4d52-45fe-b8ea-e5939dfe3fd2)
+
 **Which Is Heavier?** is a web-based game created for the **Gamedev.js Jam 2025**. The theme of the jam is **"Balance"**, and this game challenges players to balance sets of animals against each other and determine which side is heavier. The game combines physics-based interactions, 3D rendering, and quick decision-making to create a fun and engaging experience.
 
 ## Gameplay
