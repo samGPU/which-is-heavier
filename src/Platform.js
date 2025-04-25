@@ -65,12 +65,10 @@ export default class Platform {
     }
 
     setDesiredLocation(x, y, z) {
-        console.log('Setting desired location:', x, y, z);
         this.desiredLocation.set(x, y, z);
     }
 
     setDesiredRotation(x, y, z) {
-        console.log('Setting desired rotation:', x, y, z);
         this.desiredRotation.set(x, y, z);
     }
 
@@ -83,10 +81,8 @@ export default class Platform {
     }
 
     addModels(count, name) {
-        console.log('Adding models:', name, count);
         const originalModel = this.glbLoader.getMesh(name);
         if (!originalModel) {
-            console.error(`Model ${name} not found`);
             return;
         }
 

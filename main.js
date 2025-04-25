@@ -56,7 +56,6 @@ document.querySelector('#restart').addEventListener('click', () => {
 })
 
 document.addEventListener('glbLoaded', () => {
-  console.log('GLB loaded event triggered');
   document.querySelector('#loading').style.display = 'none';
   document.querySelector('#startButton').style.display = 'inline-block';
 });

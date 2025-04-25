@@ -32,9 +32,7 @@ class GLBLoader {
                 document.dispatchEvent(event);
                 console.log('GLB loaded successfully:', this.meshes);
             },
-            (xhr) => {
-                // console.log(`GLB loading: ${(xhr.loaded / xhr.total) * 100}%`);
-            },
+            (xhr) => {},
             (error) => {
                 console.error('Error loading GLB:', error);
             }

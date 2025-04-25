@@ -63,7 +63,6 @@ export default class Interaction{
     }
 
     spawnModels(optionA, optionB) {
-        console.warn('Spawning models:', optionA, optionB);
         this.RENDERER.leftPlatform.addModels(optionA.amount, optionA.meshName);
         this.RENDERER.rightPlatform.addModels(optionB.amount, optionB.meshName);
 
